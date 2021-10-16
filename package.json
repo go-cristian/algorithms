@@ -1,0 +1,24 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dijkstra.js",
+  "scripts": {
+    "start": "tsc && node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/go-cristian/algorithms.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/go-cristian/algorithms/issues"
+  },
+  "homepage": "https://github.com/go-cristian/algorithms#readme",
+  "devDependencies": {
+    "@types/node": "^16.11.0",
+    "typescript": "^4.4.4"
+  }
+}
