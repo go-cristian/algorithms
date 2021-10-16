@@ -2,4 +2,4 @@
 
 ## Implemented
 
-- [Dijstra](src/dijkstra/readme.md)
+- [Dijkstra](src/dijkstra/readme.md)
