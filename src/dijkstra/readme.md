@@ -7,4 +7,8 @@
 
 ## Run
 
-`node dijkstra.js`
+This will compile the project and run the result:
+
+```bash
+npm start ./dist/dijkstra/index.js
+```
