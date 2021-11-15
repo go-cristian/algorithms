@@ -1,4 +1,4 @@
-import { log } from '../log'
+import { dLog } from '../log'
 import { Tree, Node } from './types'
 import { inOrder } from './utils'
 
@@ -11,7 +11,7 @@ export class RedBlackTree<T> implements Tree<T> {
 
   append(value: T) {
     const node = this.insertNode(this.root, undefined, value)
-    log(`returned node: ${node.value}/${node.color}`)
+    dLog(`returned node: ${node.value}/${node.color}`)
     const isRoot = this.root === undefined
     // first scenario: root is undefined
     if (isRoot) {
@@ -41,7 +41,7 @@ export class RedBlackTree<T> implements Tree<T> {
     value: T,
   ): Node<T> {
     if (node === undefined) {
-      log(`inserting ${value} with parent: ${parent?.value}`)
+      dLog(`inserting ${value} with parent: ${parent?.value}`)
       return {
         value,
         parent,
@@ -51,14 +51,14 @@ export class RedBlackTree<T> implements Tree<T> {
       }
     } else {
       if (value < node.value){
-        log(`trying to insert ${value} at left with parent: ${node?.value}`)
+        dLog(`trying to insert ${value} at left with parent: ${node?.value}`)
         const resultNode = this.insertNode(node.left, node, value)
         if(!node.left) {
           node.left = resultNode
         }
         return resultNode
       } else if (value > node.value) {
-        log(`trying to insert ${value} at right with parent: ${node?.value}`)
+        dLog(`trying to insert ${value} at right with parent: ${node?.value}`)
         const resultNode = this.insertNode(node.right, node, value)
         if(!node.right) {
           node.right = resultNode
@@ -89,18 +89,18 @@ export class RedBlackTree<T> implements Tree<T> {
   }
 
   private updateRoot(node: Node<T>) {
-    log(`updating root to ${node.value}`)
+    dLog(`updating root to ${node.value}`)
     this.root = node
     this.root.color = 'black'
   }
 
   private applyRotations(node: Node<T>) {
     const parent = node.parent
-    if(parent) log(`parent node: ${parent.value}/${parent.color}`)
+    if(parent) dLog(`parent node: ${parent.value}/${parent.color}`)
     const isParentRed = parent?.color === 'red'
 
     if (isParentRed){
-      log('isParentRed')
+      dLog('isParentRed')
       const grandparent = node.parent?.parent
       const uncle = this.uncleOf(node)
 
@@ -108,10 +108,10 @@ export class RedBlackTree<T> implements Tree<T> {
       const hasBlackUncle = uncle === undefined || uncle.color === 'black'
       // second scenario: recolor only
       if (hasRedUncle) {
-        log('hasRedUncle')
+        dLog('hasRedUncle')
         this.recolour(node)
       } else if (hasBlackUncle) {
-        log('hasBlackUncle')
+        dLog('hasBlackUncle')
         const isLeftNodeInTriangle = node === parent.left && uncle === grandparent?.left
         const isRightNodeInTriangle = node === parent.right && uncle === grandparent?.right
         const isInTriangleShape = isLeftNodeInTriangle || isRightNodeInTriangle
@@ -122,12 +122,12 @@ export class RedBlackTree<T> implements Tree<T> {
         // third scenario: rotate on triangle movement -> rotate parent
         if (isInTriangleShape) {
           if(isLeftNodeInTriangle) {
-            log('isLeftNodeInTriangle')
+            dLog('isLeftNodeInTriangle')
             this.rotate2(node)
             if(node.right) this.rotate(node.right)
           }
           if(isRightNodeInTriangle) {
-            log('isRightNodeInTriangle')
+            dLog('isRightNodeInTriangle')
             this.rotate2(node)
             if(node.left) this.rotate(node.left)
           }
@@ -135,11 +135,11 @@ export class RedBlackTree<T> implements Tree<T> {
         // fourth scenario: rotate on line movement -> rotate grandparent
         if (isInLineShape && grandparent) {
           if(isLeftNodeInLine) {
-            log('isRightNodeInTriangle')
+            dLog('isRightNodeInTriangle')
             this.rotate(node)
           }
           if(isRightNodeInLine) {
-            log('isRightNodeInLine')
+            dLog('isRightNodeInLine')
             this.rotate(node)
           }
         }
@@ -152,10 +152,10 @@ export class RedBlackTree<T> implements Tree<T> {
     const grandParent = parent?.parent
     if (!grandParent || !parent) return
 
-    log('starting rotation for:')
-    log('node', node.value)
-    log('parent', parent.value)
-    log('grandParent', grandParent.value)
+    dLog('starting rotation for:')
+    dLog('node', node.value)
+    dLog('parent', parent.value)
+    dLog('grandParent', grandParent.value)
 
     const uncle = this.uncleOf(node)
     const greatGrandParent = grandParent.parent
@@ -206,7 +206,7 @@ export class RedBlackTree<T> implements Tree<T> {
   }
 
   private recolour(node: Node<T>) {
-    log(`applying recoloring on ${node.value}`)
+    dLog(`applying recoloring on ${node.value}`)
     const parent = node.parent
     const grandParent = parent?.parent
     const uncle = this.uncleOf(node)
@@ -218,7 +218,7 @@ export class RedBlackTree<T> implements Tree<T> {
     if(parent?.right) parent.right.color = 'red'
 
     const greatGrandParent = grandParent?.parent
-    log('greatGrandParent color', greatGrandParent?.color)
+    dLog('greatGrandParent color', greatGrandParent?.color)
     if(greatGrandParent && greatGrandParent.color === 'red' && grandParent.color === 'red') {
       this.applyRotations(grandParent)
     }

@@ -1,3 +1,4 @@
+import { log } from '../log'
 import { RedBlackTree } from './RedBlackTree'
 
 const tree: RedBlackTree<number> = new RedBlackTree()
@@ -17,5 +18,5 @@ console.log('================')
 tree.append(40)
 console.log('================')
 tree.append(80)
-console.log('================')
-console.log(tree.toString())
+log('================')
+log(tree.toString())

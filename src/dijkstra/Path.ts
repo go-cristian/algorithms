@@ -1,4 +1,4 @@
-import { log } from '../log'
+import { dLog } from '../log'
 import { DistanceRef, Edge, Graph } from './types'
 
 export class Path {
@@ -20,9 +20,9 @@ export class Path {
       this.addEdge(edge)
       this.distances[`${edge.from}-${edge.to}`] = edge.distance
     })
-    log('vertices', this.vertices)
-    log('edges', this.edges)
-    log('distances', this.distances)
+    dLog('vertices', this.vertices)
+    dLog('edges', this.edges)
+    dLog('distances', this.distances)
   }
 
   /**
@@ -44,7 +44,7 @@ export class Path {
 
     while (nonVisited.size !== 0) {
       const current = this.minDistance(distanceTo, nonVisited)
-      log('current', current)
+      dLog('current', current)
       if (current === null) break
 
       const neighbors = this.edges[current] ?? []
@@ -58,10 +58,10 @@ export class Path {
       })
       visited.add(current)
       nonVisited.delete(current)
-      log('distanceTo', distanceTo)
+      dLog('distanceTo', distanceTo)
 
     }
-    log('reverseConnections', reverseConnections)
+    dLog('reverseConnections', reverseConnections)
 
     const path = []
     let current = destination

@@ -1,3 +1,4 @@
+import { log } from '../log'
 import { Path } from './Path'
 
 const path = new Path([
@@ -16,4 +17,4 @@ const path = new Path([
   { from: '3', to: '4', distance: 9 },
   { from: '5', to: '4', distance: 10 },
 ])
-console.log(path.distance('0', '4'))
+log(path.distance('0', '4'))
