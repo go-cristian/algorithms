@@ -4,7 +4,12 @@
   "description": "",
   "main": "dijkstra.js",
   "scripts": {
-    "start": "tsc && node"
+    "start": "tsc && node",
+    "dev": "NODE_ENV=development npm run start",
+    "dijkstra": "npm run start ./dist/dijkstra/index.js",
+    "dijkstra:dev": "npm run dev ./dist/dijkstra/index.js",
+    "red-black-tree": "npm run start ./dist/red-black-tree/index.js",
+    "red-black-tree:dev": "npm run dev ./dist/red-black-tree/index.js"
   },
   "repository": {
     "type": "git",

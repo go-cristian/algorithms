@@ -10,5 +10,7 @@
 This will compile the project and run the result:
 
 ```bash
-npm start ./dist/dijkstra/index.js
+npm run dijkstra
+# run with logs
+npm run dijkstra:dev
 ```

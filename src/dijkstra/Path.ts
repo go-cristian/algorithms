@@ -1,8 +1,7 @@
+import { log } from "../log"
 import { DistanceRef, Edge, Graph } from "./types"
 
 export class Path {
-
-  private debug: boolean
   private vertices: Set<string>
   private edges: { [key: string]: Set<string> }
   private distances: { [key: string]: number }
@@ -11,8 +10,7 @@ export class Path {
    * @param {object} An object with the graph edges and vertices
    * Every edge is an object with the properties from, to and distance
    */
-  constructor(graph: Graph, debug: boolean = false) {
-    this.debug = debug
+  constructor(graph: Graph) {
     this.vertices = new Set()
     this.edges = {}
     this.distances = {}
@@ -22,11 +20,9 @@ export class Path {
       this.addEdge(edge)
       this.distances[`${edge.from}-${edge.to}`] = edge.distance
     })
-    if (this.debug) {
-      console.log('vertices', this.vertices)
-      console.log('edges', this.edges)
-      console.log('distances', this.distances)
-    }
+    log('vertices', this.vertices)
+    log('edges', this.edges)
+    log('distances', this.distances)
   }
 
   /**
@@ -48,7 +44,7 @@ export class Path {
 
     while (nonVisited.size !== 0) {
       const current = this.minDistance(distanceTo, nonVisited)
-      if (this.debug) { console.log('current', current) }
+      log('current', current)
       if (current === null) break
 
       const neighbors = this.edges[current] ?? []
@@ -62,10 +58,10 @@ export class Path {
       })
       visited.add(current)
       nonVisited.delete(current)
-      if (this.debug) { console.log('distanceTo', distanceTo) }
+      log('distanceTo', distanceTo)
 
     }
-    if (this.debug) { console.log('reverseConnections', reverseConnections) }
+    log('reverseConnections', reverseConnections)
 
     const path = []
     let current = destination
