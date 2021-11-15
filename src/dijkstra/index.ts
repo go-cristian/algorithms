@@ -1,4 +1,4 @@
-import { Path } from "./Path"
+import { Path } from './Path'
 
 const path = new Path([
   { from: '0', to: '1', distance: 4 },

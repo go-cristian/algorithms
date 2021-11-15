@@ -220,7 +220,7 @@ export class RedBlackTree<T> implements Tree<T> {
     const greatGrandParent = grandParent?.parent
     log('greatGrandParent color', greatGrandParent?.color)
     if(greatGrandParent && greatGrandParent.color === 'red' && grandParent.color === 'red') {
-       this.applyRotations(grandParent)
+      this.applyRotations(grandParent)
     }
   }
 }

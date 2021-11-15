@@ -1,5 +1,5 @@
-import { log } from "../log"
-import { DistanceRef, Edge, Graph } from "./types"
+import { log } from '../log'
+import { DistanceRef, Edge, Graph } from './types'
 
 export class Path {
   private vertices: Set<string>
