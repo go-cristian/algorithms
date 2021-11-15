@@ -7,7 +7,7 @@
 
 ## Run
 
-This will compile the project and run the result:
+This will compile the project and run the example:
 
 ```bash
 npm run dijkstra
